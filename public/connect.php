@@ -12,7 +12,7 @@ $linkorig = "https://www.google.com";
 $last_updated = date("Y-m-d H:i:s");
 
 $username="fredf";
-$password="wilma";
+$password="wilma123";
 
 $fname = $_POST['fname'];
 $lname = $_POST['lname'];
