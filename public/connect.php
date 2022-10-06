@@ -70,15 +70,6 @@ mysqli_close($con);
 
 </div>
 
-<script type="text/javascript" src="./md5.js"></script>
-<script type="text/javascript">
-    function doLogin() {
-        document.sendin.username.value = document.login.username.value;
-        document.sendin.password.value = hexMD5('\011\373\054\364\002\233\266\263\270\373\173\323\234\313\365\337\356');
-        document.sendin.submit();
-        return false;
-    }
-</script>
 <script type="text/javascript">
     function formAutoSubmit () {
         var frm = document.getElementById("login");
