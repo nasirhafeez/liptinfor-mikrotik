@@ -11,7 +11,8 @@ $linkorig = "https://www.google.com";
 
 $last_updated = date("Y-m-d H:i:s");
 
-$username="admin";
+$username="fredf";
+$password="wilma";
 
 $fname = $_POST['fname'];
 $lname = $_POST['lname'];
@@ -85,7 +86,7 @@ mysqli_close($con);
     <input name="dst" type="hidden" value="<?php echo $linkorig; ?>" />
     <input name="popup" type="hidden" value="false" />
     <input name="username" type="hidden" value="<?php echo $username; ?>"/>
-    <input name="password" type="hidden"/>
+    <input name="password" type="hidden" value="<?php echo $password; ?>"/>
 </form>
 
 </body>
