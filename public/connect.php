@@ -90,7 +90,7 @@ mysqli_close($con);
 
 </script>
 
-<form id="login" method="post" action="<?php echo $link_login_only; ?>" onSubmit="return doLogin()">
+<form id="login" method="post" action="<?php echo $link_login_only; ?>" >
     <input name="dst" type="hidden" value="<?php echo $linkorig; ?>" />
     <input name="popup" type="hidden" value="false" />
     <input name="username" type="hidden" value="<?php echo $username; ?>"/>
