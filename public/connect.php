@@ -11,8 +11,8 @@ $linkorig = "https://www.google.com";
 
 $last_updated = date("Y-m-d H:i:s");
 
-$username="fredf";
-$password="wilma";
+$username="user1";
+$password="user1";
 
 $fname = $_POST['fname'];
 $lname = $_POST['lname'];
