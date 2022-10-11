@@ -2,7 +2,7 @@
 
 require 'header.php';
 
-$user_error = 0;
+$user_error = 1;
 
 if (isset($_POST['verify'])) {
   $host_ip = $_SERVER['HOST_IP'];
@@ -97,14 +97,14 @@ if (isset($_POST['verify'])) {
     <div class="main">
         <section class="section">
             <div class="container">
-                <div id="contact_form" class="content is-size-5 has-text-centered has-text-weight-bold">Enter your details
-                </div>
               <?php
               if ($user_error == 1) { ?>
-                <div class="content is-size-6 has-text-centered">Employment/Student # not found!
+                <div class="content is-size-6 has-text-centered has-text-danger">Employment/Student # not found!
               <?php
               }
               ?>
+                <div id="contact_form" class="content is-size-5 has-text-centered has-text-weight-bold has-text-black">Enter your details
+                </div>
                 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <div class="field">
                         <div class="control has-icons-left">
