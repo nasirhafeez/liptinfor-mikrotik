@@ -124,7 +124,7 @@
                     </div>
                     <div class="field">
                         <div class="control has-icons-left">
-                            <input class="input" type="email" id="form_font" name="rollno" placeholder="Employment/Student #" required>
+                            <input class="input" type="text" id="form_font" name="rollno" placeholder="Employment/Student #" required>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-id-card"></i>
                             </span>
@@ -132,7 +132,7 @@
                     </div>
                     <div class="field">
                         <div class="control has-icons-left">
-                            <input class="input" type="email" id="form_font" name="phone" placeholder="Phone" required>
+                            <input class="input" type="tel" id="form_font" name="phone" placeholder="Phone" required>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-mobile"></i>
                             </span>
