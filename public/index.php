@@ -16,6 +16,8 @@ mysqli_report(MYSQLI_REPORT_OFF);
 $result = mysqli_query($con, "SELECT * FROM `$table_name` WHERE mac='$_SESSION[mac]'");
 
 if ($result->num_rows >= 1) {
+  // TODO: MAC Binding check
+
   $row = mysqli_fetch_array($result);
 
   mysqli_close($con);
@@ -60,7 +62,7 @@ if ($result->num_rows >= 1) {
                 <form method="post" action="connect.php">
                     <div class="field">
                         <div class="control has-icons-left">
-                            <input class="input" type="text" id="form_font" name="fname" placeholder="First Name" required>
+                            <input class="input" type="text" id="form_font" name="username" placeholder="Employment/Student #" required>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-user"></i>
                             </span>
@@ -68,35 +70,19 @@ if ($result->num_rows >= 1) {
                     </div>
                     <div class="field">
                         <div class="control has-icons-left">
-                            <input class="input" type="text" id="form_font" name="lname" placeholder="Last Name" required>
+                            <input class="input" type="text" id="form_font" name="password" placeholder="Password" required>
                             <span class="icon is-small is-left">
-                                <i class="fas fa-user"></i>
+                                <i class="fas fa-key"></i>
                             </span>
                         </div>
                     </div>
-                    <div class="field">
-                        <div class="control has-icons-left">
-                            <input class="input" type="email" id="form_font" name="email" placeholder="Email" required>
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-envelope"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="columns is-centered is-mobile">
-                        <div class="control">
-                            <label class="checkbox">
-                                <input type="checkbox" required>
-                                I agree to the <a href="policy.php">Terms of Use</a>
-                            </label>
-                        </div>
-                    </div>
-                    <br>
                     <div class="buttons is-centered">
                         <button class="button is-link">Connect</button>
                     </div>
                 </form>
             </div>
+            <br>
+            <div class="content is-size-6 has-text-centered">New User? <a href="register.php">Register here</a>
         </section>
     </div>
 </div>
