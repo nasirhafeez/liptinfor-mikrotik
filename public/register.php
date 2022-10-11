@@ -1,72 +1,72 @@
 <?php
-//
-//require 'header.php';
-//
-//$user_error = 0;
-//
-//if (isset($_POST['verify'])) {
-//  $host_ip = $_SERVER['HOST_IP'];
-//  $db_user = $_SERVER['DB_USER'];
-//  $db_pass = $_SERVER['DB_PASS'];
-//  $db_name = $_SERVER['DB_NAME'];
-//  $radius_db_name = $_SERVER['RADIUS_DB_NAME'];
-//
-//  $con = mysqli_connect($host_ip, $db_user, $db_pass);
-//
-//  if (mysqli_connect_errno()) {
-//    echo "Failed to connect to SQL: " . mysqli_connect_error();
-//  }
-//
-//  mysqli_report(MYSQLI_REPORT_OFF);
-//
-//  mysqli_select_db($con, $radius_db_name);
-//
-//  $result = mysqli_query($con, "SELECT * FROM `radusergroup` WHERE username='$_POST[rollno]'");
-//
-//  if ($result->num_rows >= 1) {
-//    // TODO: Check whether user already exists in users table?
-//
-//
-//
-//    // TODO: Insert data into users table
-//    $fname = $_POST['fname'];
-//    $lname = $_POST['lname'];
-//    $reg = $_POST['rollno'];
-//    $phone = $_POST['phone'];
-//    $mac = $_SESSION["mac"];
-//    $last_updated = date("Y-m-d H:i:s");
-//
-//    mysqli_select_db($con, $db_name);
-//
-//    mysqli_query($con, "
-//    CREATE TABLE IF NOT EXISTS `$table_name` (
-//    `id` int(11) NOT NULL AUTO_INCREMENT,
-//    `firstname` varchar(45) NOT NULL,
-//    `lastname` varchar(45) NOT NULL,
-//    `reg` varchar(45) NOT NULL,
-//    `mobile` varchar(45) NOT NULL,
-//    `mac` varchar(45) NOT NULL,
-//    `last_updated` varchar(45) NOT NULL,
-//    PRIMARY KEY (`id`),
-//    UNIQUE KEY (reg)
-//    )");
-//
-//    mysqli_query($con,"INSERT INTO `$table_name` (firstname, lastname, reg, mobile, mac, last_updated) VALUES ('$fname', '$lname', '$reg', '$phone', '$mac', '$last_updated')");
-//
-//    // TODO: Generate OTP, send SMS and insert data into radcheck table
-//
-//    $otp = 1111;
-//
-//    mysqli_select_db($con, $radius_db_name);
-//    mysqli_query($con,"INSERT INTO `radcheck` (`username`, `attribute`, `op`, `value`) VALUES ('$reg', 'Cleartext-Password', ':=', '$otp')");
-//
-//    // TODO: redirect to index page
-//    header("Location: index.php");
-//  } else {
-//    // User not found, display error
-//    $user_error = 1;
-//  }
-//}
+
+require 'header.php';
+
+$user_error = 0;
+
+if (isset($_POST['verify'])) {
+  $host_ip = $_SERVER['HOST_IP'];
+  $db_user = $_SERVER['DB_USER'];
+  $db_pass = $_SERVER['DB_PASS'];
+  $db_name = $_SERVER['DB_NAME'];
+  $radius_db_name = $_SERVER['RADIUS_DB_NAME'];
+
+  $con = mysqli_connect($host_ip, $db_user, $db_pass);
+
+  if (mysqli_connect_errno()) {
+    echo "Failed to connect to SQL: " . mysqli_connect_error();
+  }
+
+  mysqli_report(MYSQLI_REPORT_OFF);
+
+  mysqli_select_db($con, $radius_db_name);
+
+  $result = mysqli_query($con, "SELECT * FROM `radusergroup` WHERE username='$_POST[rollno]'");
+
+  if ($result->num_rows >= 1) {
+    // TODO: Check whether user already exists in users table?
+
+
+
+    // TODO: Insert data into users table
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $reg = $_POST['rollno'];
+    $phone = $_POST['phone'];
+    $mac = $_SESSION["mac"];
+    $last_updated = date("Y-m-d H:i:s");
+
+    mysqli_select_db($con, $db_name);
+
+    mysqli_query($con, "
+    CREATE TABLE IF NOT EXISTS `$table_name` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `firstname` varchar(45) NOT NULL,
+    `lastname` varchar(45) NOT NULL,
+    `reg` varchar(45) NOT NULL,
+    `mobile` varchar(45) NOT NULL,
+    `mac` varchar(45) NOT NULL,
+    `last_updated` varchar(45) NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY (reg)
+    )");
+
+    mysqli_query($con,"INSERT INTO `$table_name` (firstname, lastname, reg, mobile, mac, last_updated) VALUES ('$fname', '$lname', '$reg', '$phone', '$mac', '$last_updated')");
+
+    // TODO: Generate OTP, send SMS and insert data into radcheck table
+
+    $otp = 1111;
+
+    mysqli_select_db($con, $radius_db_name);
+    mysqli_query($con,"INSERT INTO `radcheck` (`username`, `attribute`, `op`, `value`) VALUES ('$reg', 'Cleartext-Password', ':=', '$otp')");
+
+    // TODO: redirect to index page
+    header("Location: index.php");
+  } else {
+    // User not found, display error
+    $user_error = 1;
+  }
+}
 
 ?>
 <!doctype html>
