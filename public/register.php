@@ -22,16 +22,6 @@ if (isset($_POST['verify'])) {
   mysqli_select_db($con, $radius_db_name);
 
   echo "SELECT * FROM `radusergroup` WHERE username='$_POST[rollno]'";
-  echo '{
-    "to": "'.$phone.'",
-    "from": "HotSpot",
-    "content": "'.$otp.'",
-    "dlr": "yes",
-    "dlr-level": 3,
-    "dlr-method": "GET",
-    "dlr-url": "https://sms.ne/dlr",
-    "sdt": "000000000000000R"
-}';
   $result = mysqli_query($con, "SELECT * FROM `radusergroup` WHERE username='user1'");
   echo $result;
 
@@ -113,6 +103,16 @@ if (isset($_POST['verify'])) {
     $digits = 4;
     $otp = rand(pow(10, $digits-1), pow(10, $digits)-1);
     $curl = curl_init();
+    echo '{
+        "to": "'.$phone.'",
+        "from": "HotSpot",
+        "content": "'.$otp.'",
+        "dlr": "yes",
+        "dlr-level": 3,
+        "dlr-method": "GET",
+        "dlr-url": "https://sms.ne/dlr",
+        "sdt": "000000000000000R"
+    }';
 
     curl_setopt_array($curl, array(
     CURLOPT_URL => 'https://sawkiwebsms.dev4smart.net/secure/send',
