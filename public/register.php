@@ -20,6 +20,7 @@ if (isset($_POST['verify'])) {
   mysqli_report(MYSQLI_REPORT_OFF);
 
   mysqli_select_db($con, $radius_db_name);
+  echo $radius_db_name;
 
   $result = mysqli_query($con, "SELECT * FROM `radusergroup` WHERE username='user1'");
 
