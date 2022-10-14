@@ -100,19 +100,10 @@ if (isset($_POST['verify'])) {
     echo $_POST['rollno'];
     $user_error = 1;
 
+    $phone = $_POST['phone'];
     $digits = 4;
     $otp = rand(pow(10, $digits-1), pow(10, $digits)-1);
     $curl = curl_init();
-    echo '{
-        "to": "'.$phone.'",
-        "from": "HotSpot",
-        "content": "'.$otp.'",
-        "dlr": "yes",
-        "dlr-level": 3,
-        "dlr-method": "GET",
-        "dlr-url": "https://sms.ne/dlr",
-        "sdt": "000000000000000R"
-    }';
 
     curl_setopt_array($curl, array(
     CURLOPT_URL => 'https://sawkiwebsms.dev4smart.net/secure/send',
