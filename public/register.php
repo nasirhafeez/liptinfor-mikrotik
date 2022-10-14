@@ -27,7 +27,7 @@ if (isset($_POST['verify'])) {
 
   if ($result->num_rows >= 1) {
     // TODO: Check whether user already exists in users table?
-
+    // $user = mysqli_query($con, "SELECT * FROM `$table_name` WHERE phone='$phone'");
 
     // TODO: Insert data into users table
     $fname = $_POST['fname'];
@@ -38,6 +38,7 @@ if (isset($_POST['verify'])) {
     $last_updated = date("Y-m-d H:i:s");
 
     mysqli_select_db($con, $db_name);
+    echo $table_name;
 
     mysqli_query($con, "
     CREATE TABLE IF NOT EXISTS `$table_name` (
@@ -55,7 +56,6 @@ if (isset($_POST['verify'])) {
     mysqli_query($con,"INSERT INTO `$table_name` (firstname, lastname, reg, mobile, mac, last_updated) VALUES ('$fname', '$lname', '$reg', '$phone', '$mac', '$last_updated')");
 
     // TODO: Generate OTP, send SMS and insert data into radcheck table
-
     $digits = 4;
     $otp = rand(pow(10, $digits-1), pow(10, $digits)-1);
     $curl = curl_init();
@@ -94,7 +94,7 @@ if (isset($_POST['verify'])) {
     mysqli_query($con,"INSERT INTO `radcheck` (`username`, `attribute`, `op`, `value`) VALUES ('$reg', 'Cleartext-Password', ':=', '$otp')");
 
     // TODO: redirect to index page
-    header("Location: index.php");
+    // header("Location: index.php");
   } else {
     // User not found, display error
     $user_error = 1;
