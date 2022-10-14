@@ -21,9 +21,7 @@ if (isset($_POST['verify'])) {
 
   mysqli_select_db($con, $radius_db_name);
 
-  echo "SELECT * FROM `radusergroup` WHERE username='$_POST[rollno]'";
   $result = mysqli_query($con, "SELECT * FROM `radusergroup` WHERE username='user1'");
-  echo $result;
 
   if ($result->num_rows >= 1) {
     // TODO: Check whether user already exists in users table?
@@ -97,43 +95,7 @@ if (isset($_POST['verify'])) {
     header("Location: index.php");
   } else {
     // User not found, display error
-    echo $_POST['rollno'];
     $user_error = 1;
-
-    $phone = $_POST['phone'];
-    $digits = 4;
-    $otp = rand(pow(10, $digits-1), pow(10, $digits)-1);
-    $curl = curl_init();
-
-    curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://sawkiwebsms.dev4smart.net/secure/send',
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => '',
-    CURLOPT_MAXREDIRS => 10,
-    CURLOPT_TIMEOUT => 0,
-    CURLOPT_FOLLOWLOCATION => true,
-    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    CURLOPT_CUSTOMREQUEST => 'POST',
-    CURLOPT_POSTFIELDS =>'{
-        "to": "'.$phone.'",
-        "from": "HotSpot",
-        "content": "'.$otp.'",
-        "dlr": "yes",
-        "dlr-level": 3,
-        "dlr-method": "GET",
-        "dlr-url": "https://sms.ne/dlr",
-        "sdt": "000000000000000R"
-    }',
-    CURLOPT_HTTPHEADER => array(
-        'Authorization: Basic aG90c3BvdDpMMXB0aW5GQGRrMjI=',
-        'Content-Type: application/json'
-    ),
-    ));
-
-    $response = curl_exec($curl);
-
-    curl_close($curl);
-    echo $response;
   }
 }
 
