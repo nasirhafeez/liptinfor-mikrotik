@@ -21,13 +21,12 @@ if (isset($_POST['verify'])) {
 
   mysqli_select_db($con, $radius_db_name);
 
+  echo "SELECT * FROM `radusergroup` WHERE username='$_POST[rollno]'";
   $result = mysqli_query($con, "SELECT * FROM `radusergroup` WHERE username='$_POST[rollno]'");
   echo $result;
 
   if ($result->num_rows >= 1) {
     // TODO: Check whether user already exists in users table?
-
-
 
     // TODO: Insert data into users table
     $fname = $_POST['fname'];
