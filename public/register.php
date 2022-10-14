@@ -94,7 +94,7 @@ if (isset($_POST['verify'])) {
     mysqli_query($con,"INSERT INTO `radcheck` (`username`, `attribute`, `op`, `value`) VALUES ('$reg', 'Cleartext-Password', ':=', '$otp')");
 
     // TODO: redirect to index page
-    // header("Location: index.php");
+    header("Location: index.php");
   } else {
     // User not found, display error
     $user_error = 1;
