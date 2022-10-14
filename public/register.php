@@ -23,7 +23,7 @@ if (isset($_POST['verify'])) {
   echo $radius_db_name;
 
   $result = mysqli_query($con, "SELECT * FROM `radusergroup` WHERE username='$_POST[rollno]'");
-  echo mysqli_error($dbc);
+  echo mysqli_error($con);
 
   if ($result->num_rows >= 1) {
     // TODO: Check whether user already exists in users table?
