@@ -10,6 +10,7 @@ if (isset($_POST['verify'])) {
   $db_pass = $_SERVER['DB_PASS'];
   $db_name = $_SERVER['DB_NAME'];
   $radius_db_name = $_SERVER['RADIUS_DB_NAME'];
+  $table_name = "users";
 
   $con = mysqli_connect($host_ip, $db_user, $db_pass);
 
@@ -27,33 +28,35 @@ if (isset($_POST['verify'])) {
 
   if ($result->num_rows >= 1) {
     // TODO: Check whether user already exists in users table?
-    // $user = mysqli_query($con, "SELECT * FROM `$table_name` WHERE phone='$phone'");
+    $user = mysqli_query($con, "SELECT * FROM `$table_name` WHERE phone='$phone'");
 
-    // TODO: Insert data into users table
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $reg = $_POST['rollno'];
     $phone = $_POST['phone'];
     $mac = $_SESSION["mac"];
     $last_updated = date("Y-m-d H:i:s");
+    
+    if ($user == null) {
+        // TODO: Insert data into users table
+        mysqli_select_db($con, $db_name);
+        echo $table_name;
 
-    mysqli_select_db($con, $db_name);
-    echo $table_name;
+        mysqli_query($con, "
+        CREATE TABLE IF NOT EXISTS `$table_name` (
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        `firstname` varchar(45) NOT NULL,
+        `lastname` varchar(45) NOT NULL,
+        `reg` varchar(45) NOT NULL,
+        `mobile` varchar(45) NOT NULL,
+        `mac` varchar(45) NOT NULL,
+        `last_updated` varchar(45) NOT NULL,
+        PRIMARY KEY (`id`),
+        UNIQUE KEY (reg)
+        )");
 
-    mysqli_query($con, "
-    CREATE TABLE IF NOT EXISTS `$table_name` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `firstname` varchar(45) NOT NULL,
-    `lastname` varchar(45) NOT NULL,
-    `reg` varchar(45) NOT NULL,
-    `mobile` varchar(45) NOT NULL,
-    `mac` varchar(45) NOT NULL,
-    `last_updated` varchar(45) NOT NULL,
-    PRIMARY KEY (`id`),
-    UNIQUE KEY (reg)
-    )");
-
-    mysqli_query($con,"INSERT INTO `$table_name` (firstname, lastname, reg, mobile, mac, last_updated) VALUES ('$fname', '$lname', '$reg', '$phone', '$mac', '$last_updated')");
+        mysqli_query($con,"INSERT INTO `$table_name` (firstname, lastname, reg, mobile, mac, last_updated) VALUES ('$fname', '$lname', '$reg', '$phone', '$mac', '$last_updated')");
+    }
 
     // TODO: Generate OTP, send SMS and insert data into radcheck table
     $digits = 4;
