@@ -97,6 +97,7 @@ if (isset($_POST['verify'])) {
     header("Location: index.php");
   } else {
     // User not found, display error
+    echo 'no result found';
     $user_error = 1;
   }
 }
