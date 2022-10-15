@@ -55,46 +55,46 @@ if (isset($_POST['verify'])) {
         )");
 
         mysqli_query($con,"INSERT INTO `$table_name` (firstname, lastname, reg, mobile, mac, last_updated) VALUES ('$fname', '$lname', '$reg', '$phone', '$mac', '$last_updated')");
+
+        // TODO: Generate OTP, send SMS and insert data into radcheck table
+        $digits = 4;
+        $otp = rand(pow(10, $digits-1), pow(10, $digits)-1);
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://sawkiwebsms.dev4smart.net/secure/send',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS =>'{
+            "to": "'.$phone.'",
+            "from": "HotSpot",
+            "content": "'.$otp.'",
+            "dlr": "yes",
+            "dlr-level": 3,
+            "dlr-method": "GET",
+            "dlr-url": "https://sms.ne/dlr",
+            "sdt": "000000000000000R"
+        }',
+        CURLOPT_HTTPHEADER => array(
+            'Authorization: Basic aG90c3BvdDpMMXB0aW5GQGRrMjI=',
+            'Content-Type: application/json'
+        ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        echo $response;
+
+        mysqli_select_db($con, $radius_db_name);
+        mysqli_query($con,"INSERT INTO `radcheck` (`username`, `attribute`, `op`, `value`) VALUES ('$reg', 'Cleartext-Password', ':=', '$otp')");
     }
     $user_error = 2;
-
-    // TODO: Generate OTP, send SMS and insert data into radcheck table
-    $digits = 4;
-    $otp = rand(pow(10, $digits-1), pow(10, $digits)-1);
-    $curl = curl_init();
-
-    curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://sawkiwebsms.dev4smart.net/secure/send',
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => '',
-    CURLOPT_MAXREDIRS => 10,
-    CURLOPT_TIMEOUT => 0,
-    CURLOPT_FOLLOWLOCATION => true,
-    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    CURLOPT_CUSTOMREQUEST => 'POST',
-    CURLOPT_POSTFIELDS =>'{
-        "to": "'.$phone.'",
-        "from": "HotSpot",
-        "content": "'.$otp.'",
-        "dlr": "yes",
-        "dlr-level": 3,
-        "dlr-method": "GET",
-        "dlr-url": "https://sms.ne/dlr",
-        "sdt": "000000000000000R"
-    }',
-    CURLOPT_HTTPHEADER => array(
-        'Authorization: Basic aG90c3BvdDpMMXB0aW5GQGRrMjI=',
-        'Content-Type: application/json'
-    ),
-    ));
-
-    $response = curl_exec($curl);
-
-    curl_close($curl);
-    echo $response;
-
-    mysqli_select_db($con, $radius_db_name);
-    mysqli_query($con,"INSERT INTO `radcheck` (`username`, `attribute`, `op`, `value`) VALUES ('$reg', 'Cleartext-Password', ':=', '$otp')");
 
     // TODO: redirect to index page
     header("Location: index.php");
