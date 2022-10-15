@@ -21,7 +21,6 @@ if (isset($_POST['verify'])) {
   mysqli_report(MYSQLI_REPORT_OFF);
 
   mysqli_select_db($con, $radius_db_name);
-  echo $radius_db_name;
 
   $result = mysqli_query($con, "SELECT * FROM `radusergroup` WHERE username='$_POST[rollno]'");
   echo mysqli_error($con);  
@@ -29,7 +28,6 @@ if (isset($_POST['verify'])) {
   if ($result->num_rows >= 1) {
     // TODO: Check whether user already exists in users table?
     $user = mysqli_query($con, "SELECT * FROM `$table_name` WHERE phone='$phone'");
-    echo $user;
 
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
