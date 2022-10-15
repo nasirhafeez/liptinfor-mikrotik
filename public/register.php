@@ -29,7 +29,7 @@ if (isset($_POST['verify'])) {
   if ($result->num_rows >= 1) {
     // TODO: Check whether user already exists in users table?
     $user = mysqli_query($con, "SELECT * FROM `$table_name` WHERE phone='$phone'");
-    return $user;
+    echo $user;
 
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
