@@ -56,6 +56,7 @@ if (isset($_POST['verify'])) {
 
         mysqli_query($con,"INSERT INTO `$table_name` (firstname, lastname, reg, mobile, mac, last_updated) VALUES ('$fname', '$lname', '$reg', '$phone', '$mac', '$last_updated')");
     }
+    $user_error = 2;
 
     // TODO: Generate OTP, send SMS and insert data into radcheck table
     $digits = 4;
@@ -135,6 +136,12 @@ if (isset($_POST['verify'])) {
               <?php
               if ($user_error == 1) { ?>
                 <div class="content is-size-6 has-text-centered has-text-danger">Employment/Student # not found!
+              <?php
+              }
+              ?>
+              <?php
+              if ($user_error == 2) { ?>
+                <div class="content is-size-6 has-text-centered has-text-danger">Employment/Student # already exists!
               <?php
               }
               ?>
