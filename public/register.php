@@ -29,6 +29,7 @@ if (isset($_POST['verify'])) {
   if ($result->num_rows >= 1) {
     // TODO: Check whether user already exists in users table?
     $user = mysqli_query($con, "SELECT * FROM `$table_name` WHERE phone='$phone'");
+    return $user;
 
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
@@ -36,7 +37,7 @@ if (isset($_POST['verify'])) {
     $phone = $_POST['phone'];
     $mac = $_SESSION["mac"];
     $last_updated = date("Y-m-d H:i:s");
-    if ($user == null) {
+    if ($result->num_rows == 0) {
         // TODO: Insert data into users table
         mysqli_select_db($con, $db_name);
         echo $table_name;
