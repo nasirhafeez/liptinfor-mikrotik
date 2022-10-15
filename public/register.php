@@ -93,7 +93,7 @@ if (isset($_POST['verify'])) {
         mysqli_select_db($con, $radius_db_name);
         mysqli_query($con,"INSERT INTO `radcheck` (`username`, `attribute`, `op`, `value`) VALUES ('$reg', 'Cleartext-Password', ':=', '$otp')");
 
-        // header("Location: index.php");
+        header("Location: index.php");
     } else {
         $user_error = 2;
     }
