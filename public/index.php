@@ -3,15 +3,18 @@
 require 'header.php';
 include 'config.php';
 
+$user_error = 1;
+
 $_SESSION["mac"] = $_POST['mac'];
 $_SESSION["ip"] = $_POST['ip'];
 $_SESSION["link-login"] = $_POST['link-login'];
 $_SESSION["link-login-only"] = $_POST['link-login-only'];
 
 $_SESSION["user_type"] = "new";
+$table_name = "users";
 
 # Checking DB to see if user exists or not.
-
+$_SESSION["mac"];
 mysqli_report(MYSQLI_REPORT_OFF);
 $result = mysqli_query($con, "SELECT * FROM `$table_name` WHERE mac='$_SESSION[mac]'");
 

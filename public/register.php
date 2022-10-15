@@ -2,7 +2,7 @@
 
 require 'header.php';
 
-$user_error = 1;
+$user_error = 0;
 
 if (isset($_POST['verify'])) {
   $host_ip = $_SERVER['HOST_IP'];
@@ -24,7 +24,7 @@ if (isset($_POST['verify'])) {
   echo $radius_db_name;
 
   $result = mysqli_query($con, "SELECT * FROM `radusergroup` WHERE username='$_POST[rollno]'");
-  echo mysqli_error($con);
+  echo mysqli_error($con);  
 
   if ($result->num_rows >= 1) {
     // TODO: Check whether user already exists in users table?
@@ -36,7 +36,6 @@ if (isset($_POST['verify'])) {
     $phone = $_POST['phone'];
     $mac = $_SESSION["mac"];
     $last_updated = date("Y-m-d H:i:s");
-    
     if ($user == null) {
         // TODO: Insert data into users table
         mysqli_select_db($con, $db_name);
