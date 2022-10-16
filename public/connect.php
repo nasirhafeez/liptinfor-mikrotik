@@ -3,6 +3,8 @@
 require 'header.php';
 include 'config.php';
 
+$user_error = 0;
+
 $mac = $_SESSION["mac"];
 $ip = $_SESSION["ip"];
 $link_login = $_SESSION["link-login"];
@@ -40,8 +42,7 @@ if ($_SESSION['user_type'] == "register") {
         $row = mysqli_fetch_array($result);
         $mac_old = $row['mac'];
         if ($mac_old != $mac) {
-          echo "Mac Binding Violation";
-          return;
+            $user_error = 1;
         }
     }
 }
@@ -75,8 +76,17 @@ echo $password;
     <div class="main">
         <seection class="section">
             <div class="container">
+                <?php
+                if ($user_error == 1) { ?>
+                    <div id="error" class="content is-size-6 has-text-centered has-text-danger">Access from unregistered device blocked!
+                <?php
+                } else {
+                ?>
                 <div id="margin_zero" class="content has-text-centered is-size-6">Please wait, you are being</div>
                 <div id="margin_zero" class="content has-text-centered is-size-6">authorized on the network</div>
+                <?php
+                }
+                ?>
             </div>
         </seection>
     </div>
@@ -90,8 +100,10 @@ echo $password;
         frm.submit();
     }
     // window.onload = formAutoSubmit;
-    window.onload = setTimeout(formAutoSubmit, 2500);
-
+    var error = document.getElementById('error');
+    if (!error) {
+        window.onload = setTimeout(formAutoSubmit, 2500);
+    }
 </script>
 
 <form id="login" method="post" action="<?php echo $link_login_only; ?>" >

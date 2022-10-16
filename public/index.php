@@ -3,8 +3,6 @@
 require 'header.php';
 include 'config.php';
 
-$user_error = 1;
-
 $host_ip = $_SERVER['HOST_IP'];
 $db_user = $_SERVER['DB_USER'];
 $db_pass = $_SERVER['DB_PASS'];
@@ -35,32 +33,32 @@ $result = null;
 $result = mysqli_query($con, "SELECT * FROM `$table_name` WHERE mac='$_SESSION[mac]'");
 
 if ($result->num_rows >= 1) {
-  $row = mysqli_fetch_array($result);
+    $row = mysqli_fetch_array($result);
 
-  $date_old = $row['last_updated'];
-  $date_now = date('Y-m-d H:i:s');
-  $date_diff = abs(strtotime($date_now) - strtotime($date_old)) / (60 * 60 * 24);
+    $date_old = $row['last_updated'];
+    $date_now = date('Y-m-d H:i:s');
+    $date_diff = abs(strtotime($date_now) - strtotime($date_old)) / (60 * 60 * 24);
 
-  if ($date_diff < 7) {
-    $last_updated = date("Y-m-d H:i:s");
-    $result = mysqli_query($con, "UPDATE `$table_name` SET last_updated='$last_updated' WHERE mac='$_SESSION[mac]'");
-    if ($_SESSION['user_type'] != "register") {
-      $_SESSION["user_type"] = "repeat";
-      $_SESSION["username"] = $row['reg'];
-      mysqli_select_db($con, $radius_db_name);
-      $result2 = mysqli_query($con, "SELECT * FROM `radcheck` WHERE username='$_SESSION[username]'");
-      $row2 = mysqli_fetch_array($result2);
-      $_SESSION["password"] = $row2['value'];
-      header("Location: welcome.php");
+    if ($date_diff < 7) {
+        $last_updated = date("Y-m-d H:i:s");
+        $result = mysqli_query($con, "UPDATE `$table_name` SET last_updated='$last_updated' WHERE mac='$_SESSION[mac]'");
+        if ($_SESSION['user_type'] != "register") {
+            $_SESSION["user_type"] = "repeat";
+            $_SESSION["username"] = $row['reg'];
+            mysqli_select_db($con, $radius_db_name);
+            $result2 = mysqli_query($con, "SELECT * FROM `radcheck` WHERE username='$_SESSION[username]'");
+            $row2 = mysqli_fetch_array($result2);
+            $_SESSION["password"] = $row2['value'];
+            header("Location: welcome.php");
+        }
+    } else {
+        $sql = "DELETE FROM `$table_name` WHERE mac='$_SESSION[mac]'";
+        $con->query($sql);
+        header("Location: register.php");
     }
-  } else {
-      $sql = "DELETE FROM `$table_name` WHERE mac='$_SESSION[mac]'";
-      $con->query($sql);
-      header("Location: register.php");
-  }
-  mysqli_close($con);
+    mysqli_close($con);
 } else {
-  mysqli_close($con);
+    mysqli_close($con);
 }
 
 ?>
@@ -112,7 +110,8 @@ if ($result->num_rows >= 1) {
                         </div>
                     </div>
                     <div class="buttons is-centered">
-                        <button class="button is-link">Connect</button>
+<!--                        <button class="button is-link">Connect</button>-->
+                        <input class="button is-link" type="submit" name="verify" value="Connect">
                     </div>
                 </form>
             </div>
