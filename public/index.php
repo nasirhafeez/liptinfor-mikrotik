@@ -41,12 +41,12 @@ if ($result->num_rows >= 1) {
   $_SESSION["user_type"] = "repeat";
   $date_old = $row['last_updated'];
   echo $date_old;
-  
+
   $date_now = date('Y-m-d H:i:s');
   $date_diff = abs(strtotime($date_now) - strtotime($date_old)) / (60 * 60 * 24);
   echo "date diff: ";
   echo $date_diff;
-  if ($date_diff < 7) {
+  if ($date_diff > 7) {
     $last_updated = date("Y-m-d H:i:s");
     $result = mysqli_query($con, "UPDATE `$table_name` SET last_updated='$last_updated' WHERE mac='$_SESSION[mac]'");
       header("Location: welcome.php");
