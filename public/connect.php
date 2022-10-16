@@ -19,6 +19,8 @@ if ($_SESSION['user_type'] == "register") {
     $password = $_SESSION['password'];
 }
 echo $_SESSION['user_type'];
+echo $username;
+echo $password;
 ?>
 <!DOCTYPE HTML>
 <html>
