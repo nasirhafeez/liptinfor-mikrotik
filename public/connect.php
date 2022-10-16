@@ -7,36 +7,18 @@ $mac = $_SESSION["mac"];
 $ip = $_SESSION["ip"];
 $link_login = $_SESSION["link-login"];
 $link_login_only = $_SESSION["link-login-only"];
-$linkorig = "https://www.google.com";
+$linkorig = $_SERVER['REDIRECT_URL'];
 
 $last_updated = date("Y-m-d H:i:s");
 
-$username = $_POST['username'];
-$password = $_POST['password'];
-
-if ($_SESSION["user_type"] == "new") {
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $reg = $_POST['rollno'];
-    $phone = $_POST['phone'];
-
-    mysqli_query($con, "
-    CREATE TABLE IF NOT EXISTS `$table_name` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `firstname` varchar(45) NOT NULL,
-    `lastname` varchar(45) NOT NULL,
-    `reg` varchar(45) NOT NULL,        
-    `phone` varchar(45) NOT NULL,
-    `mac` varchar(45) NOT NULL,
-    `ip` varchar(45) NOT NULL,
-    `last_updated` varchar(45) NOT NULL,
-    PRIMARY KEY (`id`)
-    )");
-
-    mysqli_query($con,"INSERT INTO `$table_name` (firstname, lastname, reg, phone, mac, ip, last_updated) VALUES ('$fname', '$lname', '$reg', '$phone', '$mac', '$ip', '$last_updated')");
+if ($_SESSION['user_type'] == "register") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+} elseif ($_SESSION['user_type'] == "repeat") {
+// TODO: For automatically authorizing repeat users uncomment the lines below
+//    $username = $_SESSION['username'];
+//    $password = $_SESSION['password'];
 }
-
-mysqli_close($con);
 
 ?>
 <!DOCTYPE HTML>

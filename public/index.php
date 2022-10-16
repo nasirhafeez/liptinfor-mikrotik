@@ -36,9 +36,7 @@ $result = mysqli_query($con, "SELECT * FROM `$table_name` WHERE mac='$_SESSION[m
 if ($result->num_rows >= 1) {
   $row = mysqli_fetch_array($result);
 
-  $_SESSION["user_type"] = "repeat";
   $date_old = $row['last_updated'];
-
   $date_now = date('Y-m-d H:i:s');
   $date_diff = abs(strtotime($date_now) - strtotime($date_old)) / (60 * 60 * 24);
 
@@ -46,6 +44,13 @@ if ($result->num_rows >= 1) {
     $last_updated = date("Y-m-d H:i:s");
     $result = mysqli_query($con, "UPDATE `$table_name` SET last_updated='$last_updated' WHERE mac='$_SESSION[mac]'");
     if ($_SESSION['user_type'] != "register") {
+      $_SESSION["user_type"] = "repeat";
+
+      // TODO: For automatically authorizing repeat users fetch their credentials from DB and add to session
+
+//      $_SESSION["username"] = "";
+//      $_SESSION["password"] = "";
+
       header("Location: welcome.php");
     }
   } else {
