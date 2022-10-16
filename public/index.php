@@ -29,9 +29,9 @@ echo $_SESSION["mac"];
 mysqli_report(MYSQLI_REPORT_OFF);
 mysqli_select_db($con, $db_name);
 $result = null;
-if ($_SESSION[mac] != '') {
+// if ($_SESSION[mac] != '') {
     $result = mysqli_query($con, "SELECT * FROM `$table_name` WHERE mac='$_SESSION[mac]'");    
-}
+// }
 
 if ($result->num_rows >= 1) {
   // TODO: MAC Binding check
