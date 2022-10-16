@@ -38,6 +38,7 @@ if ($result->num_rows >= 1) {
   // if previous login was less than 60 min ago, connect directly
   $date_now = date('Y-m-d H:i:s');
   $date_diff = abs(strtotime($date_now) - strtotime($date_old)) / (60 * 60 * 24);
+  echo "date diff: ";
   echo $date_diff;
   if ($date_diff < 7) {
     //   header("Location: welcome.php");
