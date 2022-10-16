@@ -34,7 +34,7 @@ if (isset($_POST['verify'])) {
     $phone = $_POST['phone'];
     $mac = $_SESSION["mac"];
     $last_updated = date("Y-m-d H:i:s");
-    if ($result->num_rows == 0) {
+    if ($user->num_rows == 0) {
         // TODO: Insert data into users table
         mysqli_select_db($con, $db_name);
         echo $table_name;
