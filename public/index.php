@@ -41,8 +41,11 @@ if ($result->num_rows >= 1) {
   if ($date_diff < 7) {
     $last_updated = date("Y-m-d H:i:s");
     $result = mysqli_query($con, "UPDATE `$table_name` SET last_updated='$last_updated' WHERE mac='$_SESSION[mac]'");
-
-    echo mysqli_error($con);
+    if ($result->num_rows >= 1) {
+        echo "query should have run";
+    } else {
+        echo mysqli_error($con);
+    }
     
     //   header("Location: welcome.php");
   } else {
