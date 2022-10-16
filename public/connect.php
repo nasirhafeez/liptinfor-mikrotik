@@ -17,6 +17,32 @@ if ($_SESSION['user_type'] == "register") {
 } elseif ($_SESSION['user_type'] == "repeat") {
     $username = $_SESSION['username'];
     $password = $_SESSION['password'];
+} else {
+    // For user_type new
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // TODO: Mac Binding Check
+    # Checking DB to see if user exists or not.
+    $host_ip = $_SERVER['HOST_IP'];
+    $db_user = $_SERVER['DB_USER'];
+    $db_pass = $_SERVER['DB_PASS'];
+    $db_name = $_SERVER['DB_NAME'];
+    $table_name = $_SERVER['TABLE_NAME'];
+
+    $con = mysqli_connect($host_ip, $db_user, $db_pass);
+
+    mysqli_report(MYSQLI_REPORT_OFF);
+    mysqli_select_db($con, $db_name);
+    $result = null;
+    $result = mysqli_query($con, "SELECT * FROM `$table_name` WHERE reg='$username'");
+    if ($result->num_rows >= 1) {
+      $row = mysqli_fetch_array($result);
+      $mac_old = $row['mac'];
+      if ($mac_old != $mac) {
+          echo "Mac Binding Violation";
+      }
+    }
 }
 echo $_SESSION['user_type'];
 echo $username;
