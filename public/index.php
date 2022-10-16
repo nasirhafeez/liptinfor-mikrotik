@@ -25,27 +25,24 @@ $_SESSION["user_type"] = "new";
 $table_name = "users";
 
 # Checking DB to see if user exists or not.
-echo $_SESSION["mac"];
 mysqli_report(MYSQLI_REPORT_OFF);
 mysqli_select_db($con, $db_name);
 $result = null;
-// if ($_SESSION[mac] != '') {
+if ($_SESSION[mac] != '') {
     $result = mysqli_query($con, "SELECT * FROM `$table_name` WHERE mac='$_SESSION[mac]'");    
-// }
+}
 
 if ($result->num_rows >= 1) {
   // TODO: MAC Binding check
-
+  
   $row = mysqli_fetch_array($result);
 
   $_SESSION["user_type"] = "repeat";
   $date_old = $row['last_updated'];
-  echo $date_old;
 
   $date_now = date('Y-m-d H:i:s');
   $date_diff = abs(strtotime($date_now) - strtotime($date_old)) / (60 * 60 * 24);
   echo "date diff: ";
-  echo $date_diff;
   if ($date_diff > 7) {
     $last_updated = date("Y-m-d H:i:s");
     $result = mysqli_query($con, "UPDATE `$table_name` SET last_updated='$last_updated' WHERE mac='$_SESSION[mac]'");
