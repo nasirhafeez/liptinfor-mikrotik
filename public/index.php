@@ -5,6 +5,18 @@ include 'config.php';
 
 $user_error = 1;
 
+$host_ip = $_SERVER['HOST_IP'];
+$db_user = $_SERVER['DB_USER'];
+$db_pass = $_SERVER['DB_PASS'];
+$db_name = $_SERVER['DB_NAME'];
+$radius_db_name = $_SERVER['RADIUS_DB_NAME'];
+
+$con = mysqli_connect($host_ip, $db_user, $db_pass);
+
+if (mysqli_connect_errno()) {
+  echo "Failed to connect to SQL: " . mysqli_connect_error();
+}
+
 $_SESSION["mac"] = $_POST['mac'];
 $_SESSION["ip"] = $_POST['ip'];
 $_SESSION["link-login"] = $_POST['link-login'];
@@ -16,6 +28,7 @@ $table_name = "users";
 # Checking DB to see if user exists or not.
 echo $_SESSION["mac"];
 mysqli_report(MYSQLI_REPORT_OFF);
+mysqli_select_db($con, $db_name);
 $result = mysqli_query($con, "SELECT * FROM `$table_name` WHERE mac='$_SESSION[mac]'");
 
 if ($result->num_rows >= 1) {
