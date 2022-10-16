@@ -36,13 +36,9 @@ if ($result->num_rows >= 1) {
 
   $row = mysqli_fetch_array($result);
 
-  mysqli_close($con);
-
   $_SESSION["user_type"] = "repeat";
   $date_old = $row['last_updated'];
   echo $date_old;
-
-  mysqli_close($con);
 
   date_default_timezone_set("Asia/Jerusalem");
 
@@ -66,6 +62,7 @@ if ($result->num_rows >= 1) {
       $con->query($sql);
       header("Location: register.php");
   }
+  mysqli_close($con);
 } else {
   mysqli_close($con);
 }
