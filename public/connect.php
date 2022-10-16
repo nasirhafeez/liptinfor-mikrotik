@@ -46,9 +46,9 @@ if ($_SESSION['user_type'] == "register") {
         }
     }
 }
-echo $_SESSION['user_type'];
-echo $username;
-echo $password;
+//echo $_SESSION['user_type'];
+//echo $username;
+//echo $password;
 ?>
 <!DOCTYPE HTML>
 <html>
