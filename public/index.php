@@ -15,6 +15,7 @@ $table_name = "users";
 
 # Checking DB to see if user exists or not.
 echo $_SESSION["mac"];
+echo "rows effected: ";
 mysqli_report(MYSQLI_REPORT_OFF);
 $result = mysqli_query($con, "SELECT * FROM `$table_name` WHERE mac='$_SESSION[mac]'");
 echo $resul->num_rows;
