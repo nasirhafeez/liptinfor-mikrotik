@@ -34,7 +34,7 @@ if ($_SESSION[mac] != '') {
 
 if ($result->num_rows >= 1) {
   // TODO: MAC Binding check
-  
+
   $row = mysqli_fetch_array($result);
 
   $_SESSION["user_type"] = "repeat";
@@ -43,7 +43,7 @@ if ($result->num_rows >= 1) {
   $date_now = date('Y-m-d H:i:s');
   $date_diff = abs(strtotime($date_now) - strtotime($date_old)) / (60 * 60 * 24);
   echo "date diff: ";
-  if ($date_diff > 7) {
+  if ($date_diff < 7) {
     $last_updated = date("Y-m-d H:i:s");
     $result = mysqli_query($con, "UPDATE `$table_name` SET last_updated='$last_updated' WHERE mac='$_SESSION[mac]'");
       header("Location: welcome.php");
