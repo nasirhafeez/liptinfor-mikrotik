@@ -9,6 +9,7 @@ $host_ip = $_SERVER['HOST_IP'];
 $db_user = $_SERVER['DB_USER'];
 $db_pass = $_SERVER['DB_PASS'];
 $db_name = $_SERVER['DB_NAME'];
+$radius_db_name = $_SERVER['RADIUS_DB_NAME'];
 
 $con = mysqli_connect($host_ip, $db_user, $db_pass);
 
@@ -45,10 +46,12 @@ if ($result->num_rows >= 1) {
     $result = mysqli_query($con, "UPDATE `$table_name` SET last_updated='$last_updated' WHERE mac='$_SESSION[mac]'");
     if ($_SESSION['user_type'] != "register") {
       $_SESSION["user_type"] = "repeat";
-      // TODO: For automatically authorizing repeat users fetch their credentials from DB and add to session
-//      $_SESSION["username"] = "";
-//      $_SESSION["password"] = "";
-//      header("Location: welcome.php");
+      $_SESSION["username"] = $row['reg'];
+      mysqli_select_db($con, $radius_db_name);
+      $result2 = mysqli_query($con, "SELECT * FROM `radcheck` WHERE username='$username'");
+      $row2 = mysqli_fetch_array($result2);
+      $_SESSION["password"] = $row2['value'];
+      header("Location: welcome.php");
     }
   } else {
       $sql = "DELETE FROM `$table_name` WHERE mac='$_SESSION[mac]'";

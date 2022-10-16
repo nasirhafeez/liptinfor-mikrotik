@@ -15,11 +15,8 @@ if ($_SESSION['user_type'] == "register") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 } elseif ($_SESSION['user_type'] == "repeat") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-// TODO: For automatically authorizing repeat users uncomment the lines below
-//    $username = $_SESSION['username'];
-//    $password = $_SESSION['password'];
+    $username = $_SESSION['username'];
+    $password = $_SESSION['password'];
 }
 echo $_SESSION['user_type'];
 ?>
