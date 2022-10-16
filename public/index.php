@@ -48,8 +48,11 @@ if ($result->num_rows >= 1) {
       $_SESSION["user_type"] = "repeat";
       $_SESSION["username"] = $row['reg'];
       mysqli_select_db($con, $radius_db_name);
-      $result2 = mysqli_query($con, "SELECT * FROM `radcheck` WHERE username='$username'");
+      $result2 = mysqli_query($con, "SELECT * FROM `radcheck` WHERE username='$_SESSION[username]'");
       $row2 = mysqli_fetch_array($result2);
+
+//      print_r($row2);
+
       $_SESSION["password"] = $row2['value'];
       header("Location: welcome.php");
     }
