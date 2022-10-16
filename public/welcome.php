@@ -21,12 +21,13 @@ require 'header.php';
 <body>
 <div class="page">
 
-  <div class="head">
-    <br>
-    <figure id="logo">
-      <img src="assets/images/logo.png">
-    </figure>
-  </div>
+    <div class="head">
+        <br>
+        <figure id="logo">
+            <img id="img1" src="assets/images/uni-logo1.jpg">
+            <img id="img2" src="assets/images/uni-logo2.jpg">
+        </figure>
+    </div>
 
   <div class="main">
     <seection class="section">

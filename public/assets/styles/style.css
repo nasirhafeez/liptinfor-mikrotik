@@ -33,10 +33,20 @@ a:link
 
 #logo
 {
-  width: 35%;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#img1
+{
+  width: 60%;
+}
+
+#img2
+{
+  width: 30%;
 }
 
 #contact_form

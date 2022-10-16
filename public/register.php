@@ -129,7 +129,8 @@ if (isset($_POST['verify'])) {
     <div class="head">
         <br>
         <figure id="logo">
-            <img src="assets/images/logo.png">
+            <img id="img1" src="assets/images/uni-logo1.jpg">
+            <img id="img2" src="assets/images/uni-logo2.jpg">
         </figure>
     </div>
 
