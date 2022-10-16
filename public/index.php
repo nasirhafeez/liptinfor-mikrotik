@@ -14,10 +14,10 @@ $_SESSION["user_type"] = "new";
 $table_name = "users";
 
 # Checking DB to see if user exists or not.
-$_SESSION["mac"];
+echo $_SESSION["mac"];
 mysqli_report(MYSQLI_REPORT_OFF);
-echo "SELECT * FROM `$table_name` WHERE mac='$_SESSION[mac]'";
 $result = mysqli_query($con, "SELECT * FROM `$table_name` WHERE mac='$_SESSION[mac]'");
+echo $resul->num_rows;
 
 if ($result->num_rows >= 1) {
   // TODO: MAC Binding check
