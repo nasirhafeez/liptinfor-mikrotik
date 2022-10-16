@@ -43,7 +43,7 @@ if ($result->num_rows >= 1) {
     $sql = "UPDATE `$table_name` SET last_updated='$last_updated' WHERE mac='$_SESSION[mac]'";
     echo $sql;
     $con->query($sql);
-    echo mysqli_error($conn);
+    echo mysqli_error($con);
     
     //   header("Location: welcome.php");
   } else {
