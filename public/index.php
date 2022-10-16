@@ -9,7 +9,6 @@ $host_ip = $_SERVER['HOST_IP'];
 $db_user = $_SERVER['DB_USER'];
 $db_pass = $_SERVER['DB_PASS'];
 $db_name = $_SERVER['DB_NAME'];
-$radius_db_name = $_SERVER['RADIUS_DB_NAME'];
 
 $con = mysqli_connect($host_ip, $db_user, $db_pass);
 
@@ -42,10 +41,7 @@ if ($result->num_rows >= 1) {
   $_SESSION["user_type"] = "repeat";
   $date_old = $row['last_updated'];
   echo $date_old;
-
-  date_default_timezone_set("Asia/Jerusalem");
-
-  // if previous login was less than 60 min ago, connect directly
+  
   $date_now = date('Y-m-d H:i:s');
   $date_diff = abs(strtotime($date_now) - strtotime($date_old)) / (60 * 60 * 24);
   echo "date diff: ";
