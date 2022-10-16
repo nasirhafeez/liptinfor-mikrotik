@@ -16,25 +16,24 @@ if (mysqli_connect_errno()) {
   echo "Failed to connect to SQL: " . mysqli_connect_error();
 }
 
-$_SESSION["mac"] = $_POST['mac'];
-$_SESSION["ip"] = $_POST['ip'];
-$_SESSION["link-login"] = $_POST['link-login'];
-$_SESSION["link-login-only"] = $_POST['link-login-only'];
+if (isset($_POST['mac'])) {
+    $_SESSION["user_type"] = "new";
+    $_SESSION["mac"] = $_POST['mac'];
+    $_SESSION["ip"] = $_POST['ip'];
+    $_SESSION["link-login"] = $_POST['link-login'];
+    $_SESSION["link-login-only"] = $_POST['link-login-only'];
+}
 
-$_SESSION["user_type"] = "new";
 $table_name = $_SERVER['TABLE_NAME'];
 
 # Checking DB to see if user exists or not.
 mysqli_report(MYSQLI_REPORT_OFF);
 mysqli_select_db($con, $db_name);
 $result = null;
-//if ($_SESSION[mac] != '') {
+
 $result = mysqli_query($con, "SELECT * FROM `$table_name` WHERE mac='$_SESSION[mac]'");
-//}
 
 if ($result->num_rows >= 1) {
-  // TODO: MAC Binding check
-
   $row = mysqli_fetch_array($result);
 
   $_SESSION["user_type"] = "repeat";
@@ -42,11 +41,13 @@ if ($result->num_rows >= 1) {
 
   $date_now = date('Y-m-d H:i:s');
   $date_diff = abs(strtotime($date_now) - strtotime($date_old)) / (60 * 60 * 24);
-  echo "date diff: ";
+
   if ($date_diff < 7) {
     $last_updated = date("Y-m-d H:i:s");
     $result = mysqli_query($con, "UPDATE `$table_name` SET last_updated='$last_updated' WHERE mac='$_SESSION[mac]'");
+    if ($_SESSION['user_type'] != "register") {
       header("Location: welcome.php");
+    }
   } else {
       $sql = "DELETE FROM `$table_name` WHERE mac='$_SESSION[mac]'";
       $con->query($sql);

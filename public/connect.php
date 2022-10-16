@@ -14,24 +14,26 @@ $last_updated = date("Y-m-d H:i:s");
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-$fname = $_POST['fname'];
-$lname = $_POST['lname'];
-$email = $_POST['email'];
-
 if ($_SESSION["user_type"] == "new") {
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $reg = $_POST['rollno'];
+    $phone = $_POST['phone'];
+
     mysqli_query($con, "
     CREATE TABLE IF NOT EXISTS `$table_name` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `firstname` varchar(45) NOT NULL,
     `lastname` varchar(45) NOT NULL,
-    `email` varchar(45) NOT NULL,
+    `reg` varchar(45) NOT NULL,        
+    `phone` varchar(45) NOT NULL,
     `mac` varchar(45) NOT NULL,
     `ip` varchar(45) NOT NULL,
     `last_updated` varchar(45) NOT NULL,
     PRIMARY KEY (`id`)
     )");
 
-    mysqli_query($con,"INSERT INTO `$table_name` (firstname, lastname, email, mac, ip, last_updated) VALUES ('$fname', '$lname', '$email', '$mac', '$ip', '$last_updated')");
+    mysqli_query($con,"INSERT INTO `$table_name` (firstname, lastname, reg, phone, mac, ip, last_updated) VALUES ('$fname', '$lname', '$reg', '$phone', '$mac', '$ip', '$last_updated')");
 }
 
 mysqli_close($con);

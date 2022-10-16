@@ -26,18 +26,19 @@ if (isset($_POST['verify'])) {
 
   if ($result->num_rows >= 1) {
     // TODO: Check whether user already exists in users table?
-    $user = mysqli_query($con, "SELECT * FROM `$table_name` WHERE phone='$phone'");
 
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $reg = $_POST['rollno'];
     $phone = $_POST['phone'];
     $mac = $_SESSION["mac"];
+
+    $user = mysqli_query($con, "SELECT * FROM `$table_name` WHERE reg='$reg'");
+
     $last_updated = date("Y-m-d H:i:s");
     if ($user->num_rows == 0) {
         // TODO: Insert data into users table
         mysqli_select_db($con, $db_name);
-        echo $table_name;
 
         mysqli_query($con, "
         CREATE TABLE IF NOT EXISTS `$table_name` (
@@ -57,6 +58,7 @@ if (isset($_POST['verify'])) {
         // TODO: Generate OTP, send SMS and insert data into radcheck table
         $digits = 4;
         $otp = rand(pow(10, $digits-1), pow(10, $digits)-1);
+        $auth_code = $_SERVER['AUTH_CODE'];
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -79,7 +81,7 @@ if (isset($_POST['verify'])) {
             "sdt": "000000000000000R"
         }',
         CURLOPT_HTTPHEADER => array(
-            'Authorization: Basic aG90c3BvdDpMMXB0aW5GQGRrMjI=',
+            'Authorization: Basic ' . $auth_code,
             'Content-Type: application/json'
         ),
         ));
@@ -92,6 +94,8 @@ if (isset($_POST['verify'])) {
         mysqli_select_db($con, $radius_db_name);
         mysqli_query($con,"INSERT INTO `radcheck` (`username`, `attribute`, `op`, `value`) VALUES ('$reg', 'Cleartext-Password', ':=', '$otp')");
 
+
+        $_SESSION["user_type"] = "register";
         header("Location: index.php");
     } else {
         $user_error = 2;
