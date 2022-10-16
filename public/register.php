@@ -10,7 +10,7 @@ if (isset($_POST['verify'])) {
   $db_pass = $_SERVER['DB_PASS'];
   $db_name = $_SERVER['DB_NAME'];
   $radius_db_name = $_SERVER['RADIUS_DB_NAME'];
-  $table_name = "users";
+  $table_name = $_SERVER['TABLE_NAME'];
 
   $con = mysqli_connect($host_ip, $db_user, $db_pass);
 
