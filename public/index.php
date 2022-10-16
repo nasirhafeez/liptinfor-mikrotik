@@ -26,7 +26,22 @@ if ($result->num_rows >= 1) {
   mysqli_close($con);
 
   $_SESSION["user_type"] = "repeat";
-//   header("Location: welcome.php");
+  $date_old = $row['last_updated'];
+
+  mysqli_close($con);
+
+  date_default_timezone_set("Asia/Jerusalem");
+
+  // if previous login was less than 60 min ago, connect directly
+  $date_now = date('Y-m-d H:i:s');
+  $date_diff = abs(strtotime($date_now) - strtotime($date_old)) / (60 * 60 * 24);
+  if ($date_diff < 7) {
+      header("Location: welcome.php");
+  } else {
+      $sql = "DELETE FROM `$table_name` WHERE mac='$_SESSION[mac]'";
+      $con->query($sql);
+      header("Location: register.php");
+  }
 } else {
   mysqli_close($con);
 }
