@@ -29,6 +29,7 @@ if ($result->num_rows >= 1) {
 
   $_SESSION["user_type"] = "repeat";
   $date_old = $row['last_updated'];
+  echo $date_old;
 
   mysqli_close($con);
 
