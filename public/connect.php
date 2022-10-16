@@ -37,11 +37,12 @@ if ($_SESSION['user_type'] == "register") {
     $result = null;
     $result = mysqli_query($con, "SELECT * FROM `$table_name` WHERE reg='$username'");
     if ($result->num_rows >= 1) {
-      $row = mysqli_fetch_array($result);
-      $mac_old = $row['mac'];
-      if ($mac_old != $mac) {
+        $row = mysqli_fetch_array($result);
+        $mac_old = $row['mac'];
+        if ($mac_old != $mac) {
           echo "Mac Binding Violation";
-      }
+          return;
+        }
     }
 }
 echo $_SESSION['user_type'];
