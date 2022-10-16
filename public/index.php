@@ -15,10 +15,8 @@ $table_name = "users";
 
 # Checking DB to see if user exists or not.
 echo $_SESSION["mac"];
-echo "rows effected: ";
 mysqli_report(MYSQLI_REPORT_OFF);
 $result = mysqli_query($con, "SELECT * FROM `$table_name` WHERE mac='$_SESSION[mac]'");
-echo $resul->num_rows;
 
 if ($result->num_rows >= 1) {
   // TODO: MAC Binding check
@@ -41,6 +39,9 @@ if ($result->num_rows >= 1) {
   echo "date diff: ";
   echo $date_diff;
   if ($date_diff < 7) {
+    $last_updated = date("Y-m-d H:i:s");
+    $sql = "UPDATE `$table_name` SET last_updated='$last_updated' WHERE mac='$_SESSION[mac]'";
+    $con->query($sql);
     //   header("Location: welcome.php");
   } else {
       $sql = "DELETE FROM `$table_name` WHERE mac='$_SESSION[mac]'";
