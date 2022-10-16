@@ -42,7 +42,8 @@ if ($result->num_rows >= 1) {
     $last_updated = date("Y-m-d H:i:s");
     $sql = "UPDATE `$table_name` SET last_updated='$last_updated' WHERE mac='$_SESSION[mac]'";
     echo $sql;
-    $con->query($sql);
+    echo $con->query($sql);
+    
     //   header("Location: welcome.php");
   } else {
       $sql = "DELETE FROM `$table_name` WHERE mac='$_SESSION[mac]'";
