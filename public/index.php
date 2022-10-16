@@ -45,13 +45,10 @@ if ($result->num_rows >= 1) {
     $result = mysqli_query($con, "UPDATE `$table_name` SET last_updated='$last_updated' WHERE mac='$_SESSION[mac]'");
     if ($_SESSION['user_type'] != "register") {
       $_SESSION["user_type"] = "repeat";
-
       // TODO: For automatically authorizing repeat users fetch their credentials from DB and add to session
-
 //      $_SESSION["username"] = "";
 //      $_SESSION["password"] = "";
-
-      header("Location: welcome.php");
+//      header("Location: welcome.php");
     }
   } else {
       $sql = "DELETE FROM `$table_name` WHERE mac='$_SESSION[mac]'";
