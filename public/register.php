@@ -33,7 +33,7 @@ if (isset($_POST['verify'])) {
     $phone = $_POST['phone'];
     $mac = $_SESSION["mac"];
 
-    $user = mysqli_query($con, "SELECT * FROM `$table_name` WHERE reg='$reg'");
+    $user = mysqli_query($con, "SELECT * FROM `$table_name` WHERE username='$reg'");
 
     $last_updated = date("Y-m-d H:i:s");
     if ($user->num_rows == 0) {
