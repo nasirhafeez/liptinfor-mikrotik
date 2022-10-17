@@ -33,7 +33,7 @@ if (isset($_POST['verify'])) {
     $phone = $_POST['phone'];
     $mac = $_SESSION["mac"];
 
-    mysqli_select_db($con, $table_name);
+    mysqli_select_db($con, $db_name);
     $user = mysqli_query($con, "SELECT * FROM `$table_name` WHERE reg='$reg'");
 
     $last_updated = date("Y-m-d H:i:s");
@@ -54,7 +54,7 @@ if (isset($_POST['verify'])) {
         UNIQUE KEY (reg)
         )");
 
-        mysqli_select_db($con, $table_name);
+        mysqli_select_db($con, $db_name);
         mysqli_query($con,"INSERT INTO `$table_name` (firstname, lastname, reg, mobile, mac, last_updated) VALUES ('$fname', '$lname', '$reg', '$phone', '$mac', '$last_updated')");
 
         // TODO: Generate OTP, send SMS and insert data into radcheck table
