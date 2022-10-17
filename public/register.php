@@ -37,7 +37,7 @@ if (isset($_POST['verify'])) {
     $user = mysqli_query($con, "SELECT * FROM `$table_name` WHERE reg='$reg'");
 
     $last_updated = date("Y-m-d H:i:s");
-    if ($user->num_rows == -10) {
+    if ($user->num_rows == 0) {
         // TODO: Insert data into users table
         mysqli_select_db($con, $db_name);
 
