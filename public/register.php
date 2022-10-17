@@ -33,10 +33,11 @@ if (isset($_POST['verify'])) {
     $phone = $_POST['phone'];
     $mac = $_SESSION["mac"];
 
+    echo "SELECT * FROM `$table_name` WHERE reg='$reg'";
     $user = mysqli_query($con, "SELECT * FROM `$table_name` WHERE reg='$reg'");
 
     $last_updated = date("Y-m-d H:i:s");
-    if ($user->num_rows == 0) {
+    if ($user->num_rows == -10) {
         // TODO: Insert data into users table
         mysqli_select_db($con, $db_name);
 
