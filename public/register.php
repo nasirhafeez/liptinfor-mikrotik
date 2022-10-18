@@ -141,22 +141,22 @@ if (isset($_POST['verify'])) {
             <div class="container">
               <?php
               if ($user_error == 1) { ?>
-                <div class="content is-size-6 has-text-centered has-text-danger">Employment/Student # not found!
+                <div class="content is-size-6 has-text-centered has-text-danger">Matricule universitaire pas trouvé!
               <?php
               }
               ?>
               <?php
               if ($user_error == 2) { ?>
-                <div class="content is-size-6 has-text-centered has-text-danger">Employment/Student # already exists!
+                <div class="content is-size-6 has-text-centered has-text-danger">Matricule universitaire existe déjà!
               <?php
               }
               ?>
-                <div id="contact_form" class="content is-size-5 has-text-centered has-text-weight-bold has-text-black">Enter your details
+                <div id="contact_form" class="content is-size-5 has-text-centered has-text-weight-bold has-text-black">Saisir vos information
                 </div>
                 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <div class="field">
                         <div class="control has-icons-left">
-                            <input class="input" type="text" id="form_font" name="fname" placeholder="First Name" required>
+                            <input class="input" type="text" id="form_font" name="fname" placeholder="Prénom" required>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-user"></i>
                             </span>
@@ -164,7 +164,7 @@ if (isset($_POST['verify'])) {
                     </div>
                     <div class="field">
                         <div class="control has-icons-left">
-                            <input class="input" type="text" id="form_font" name="lname" placeholder="Last Name" required>
+                            <input class="input" type="text" id="form_font" name="lname" placeholder="Nom de famille" required>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-user"></i>
                             </span>
@@ -172,7 +172,7 @@ if (isset($_POST['verify'])) {
                     </div>
                     <div class="field">
                         <div class="control has-icons-left">
-                            <input class="input" type="text" id="form_font" name="rollno" placeholder="Employment/Student #" required>
+                            <input class="input" type="text" id="form_font" name="rollno" placeholder="Matricule universitaire" required>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-id-card"></i>
                             </span>
@@ -180,14 +180,14 @@ if (isset($_POST['verify'])) {
                     </div>
                     <div class="field">
                         <div class="control has-icons-left">
-                            <input class="input" type="tel" id="form_font" name="phone" placeholder="Phone" required>
+                            <input class="input" type="tel" id="form_font" name="phone" placeholder="Numéro de téléphone" required>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-mobile"></i>
                             </span>
                         </div>
                     </div>
                     <div class="buttons is-centered">
-                        <input class="button is-link" type="submit" name="verify" value="Register">
+                        <input class="button is-link" type="submit" name="verify" value="S'inscrire">
                     </div>
                 </form>
             </div>

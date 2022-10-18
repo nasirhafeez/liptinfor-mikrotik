@@ -95,33 +95,42 @@ if ($result->num_rows >= 1) {
     <div class="main">
         <section class="section">
             <div class="container">
-                <div id="contact_form" class="content is-size-5 has-text-centered has-text-weight-bold">Enter your details
+                <div class="columns is-centered">
+                    <div class="column is-two-fifths">
+                        <div class="content is-size-6 has-text-centered">
+                            Vous n'avez pas besoin de vous inscrire si vous avez déjà un compte, veuillez utiliser votre matricule universitaire et mot de passe reçus par sms
+                        </div>
+                    </div>
                 </div>
-                <form method="post" action="connect.php">
-                    <div class="field">
-                        <div class="control has-icons-left">
-                            <input class="input" type="text" id="form_font" name="username" placeholder="Employment/Student #" required>
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-user"></i>
-                            </span>
+                <div class="columns is-centered">
+                    <div class="column is-one-quarter">
+                        <form method="post" action="connect.php">
+                            <div class="field">
+                                <div class="control has-icons-left">
+                                    <input class="input" type="text" id="form_font" name="username" placeholder="Matricule universitaire" required>
+                                    <span class="icon is-small is-left">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control has-icons-left">
+                                    <input class="input" type="text" id="form_font" name="password" placeholder="Mot de passe" required>
+                                    <span class="icon is-small is-left">
+                                    <i class="fas fa-key"></i>
+                                </span>
+                                </div>
+                            </div>
+                            <div class="buttons is-centered">
+                                <input class="button is-link" type="submit" name="verify" value="Connexion">
+                            </div>
+                        </form>
+                        <br>
+                        <div class="content is-size-6 has-text-centered">
+                            <a href="register.php">Cliquez ici pour vous inscrire</a>
                         </div>
                     </div>
-                    <div class="field">
-                        <div class="control has-icons-left">
-                            <input class="input" type="text" id="form_font" name="password" placeholder="Password" required>
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-key"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="buttons is-centered">
-<!--                        <button class="button is-link">Connect</button>-->
-                        <input class="button is-link" type="submit" name="verify" value="Connect">
-                    </div>
-                </form>
-            </div>
-            <br>
-            <div class="content is-size-6 has-text-centered">New User? <a href="register.php">Register here</a>
+                </div>
         </section>
     </div>
 </div>

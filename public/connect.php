@@ -46,9 +46,7 @@ if ($_SESSION['user_type'] == "register") {
         }
     }
 }
-//echo $_SESSION['user_type'];
-//echo $username;
-//echo $password;
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -79,12 +77,14 @@ if ($_SESSION['user_type'] == "register") {
             <div class="container">
                 <?php
                 if ($user_error == 1) { ?>
-                    <div id="error" class="content is-size-6 has-text-centered has-text-danger">Access from unregistered device blocked!
+                    <div id="error" class="content is-size-6 has-text-centered has-text-danger">
+                        Accès depuis un appareil non enregistré bloqué !
+                    </div>
                 <?php
                 } else {
                 ?>
-                <div id="margin_zero" class="content has-text-centered is-size-6">Please wait, you are being</div>
-                <div id="margin_zero" class="content has-text-centered is-size-6">authorized on the network</div>
+                <div id="margin_zero" class="content has-text-centered is-size-6">Veuillez patienter, vous êtes</div>
+                <div id="margin_zero" class="content has-text-centered is-size-6">autorisé sur le réseau</div>
                 <?php
                 }
                 ?>
