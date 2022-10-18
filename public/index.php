@@ -38,7 +38,7 @@ if ($result->num_rows >= 1) {
     $date_old = $row['last_updated'];
     $date_now = date('Y-m-d H:i:s');
     $date_diff = abs(strtotime($date_now) - strtotime($date_old)) / (60 * 60 * 24);
-
+    echo $date_diff;
     if ($date_diff < 7) {
         $last_updated = date("Y-m-d H:i:s");
         $result = mysqli_query($con, "UPDATE `$table_name` SET last_updated='$last_updated' WHERE mac='$_SESSION[mac]'");
