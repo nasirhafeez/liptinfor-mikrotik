@@ -54,6 +54,10 @@ if ($result->num_rows >= 1) {
     } else {
         $sql = "DELETE FROM `$table_name` WHERE mac='$_SESSION[mac]'";
         $con->query($sql);
+        $reg = $row['reg'];
+        mysqli_select_db($con, $radius_db_name);
+        $sql = "DELETE FROM `radcheck` WHERE username='$reg'";
+        $con->query($sql);
         header("Location: register.php");
     }
     mysqli_close($con);
