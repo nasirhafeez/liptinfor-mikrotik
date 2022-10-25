@@ -4,3 +4,4 @@ vendor/
 .idea/
 *.html
 .env
+.DS_Store

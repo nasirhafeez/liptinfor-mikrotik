@@ -51,7 +51,7 @@ if (isset($_POST['verify'])) {
         `mac` varchar(45) NOT NULL,
         `last_updated` varchar(45) NOT NULL,
         PRIMARY KEY (`id`),
-        UNIQUE KEY (reg)
+        UNIQUE KEY (mac)
         )");
 
         mysqli_select_db($con, $db_name);
