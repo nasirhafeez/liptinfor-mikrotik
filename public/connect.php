@@ -57,6 +57,9 @@ if ($_SESSION['user_type'] == "register") {
         }
     }
 
+    echo $user_error;
+    echo $i;
+
     if ($user_error == 1 && $i < $allowed_devices) {
         $user_error = 0;
         $last_updated = date("Y-m-d H:i:s");
