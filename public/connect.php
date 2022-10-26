@@ -4,7 +4,7 @@ require 'header.php';
 include 'config.php';
 
 $user_error = 0;
-$allowed_devices = 2;
+$allowed_devices = $_SERVER['ALLOWED_DEVICES'];
 
 $mac = $_SESSION["mac"];
 $ip = $_SESSION["ip"];
@@ -57,23 +57,12 @@ if ($_SESSION['user_type'] == "register") {
         }
     }
 
-    echo $user_error;
-    echo $i;
-
     if ($user_error == 1 && $i < $allowed_devices) {
         $user_error = 0;
         $last_updated = date("Y-m-d H:i:s");
         mysqli_select_db($con, $db_name);
         mysqli_query($con,"INSERT INTO `$table_name` (firstname, lastname, reg, mobile, mac, last_updated) VALUES ('$fname', '$lname', '$reg', '$phone', '$mac', '$last_updated')");
     }
-
-    // if ($result->num_rows >= 1) {
-    //     $row = mysqli_fetch_array($result);
-    //     $mac_old = $row['mac'];
-    //     if ($mac_old != $mac) {
-    //         $user_error = 1;
-    //     }
-    // }
 }
 
 ?>
