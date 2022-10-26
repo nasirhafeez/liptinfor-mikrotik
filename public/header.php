@@ -2,7 +2,7 @@
 
 session_start();
 
-if (!(isset($_SESSION['mac']) or isset($POST['mac']))) {
+if (!(isset($_SESSION['mac']) or isset($_POST['mac']))) {
   exit('Cannot access this page directly');
 }
 
