@@ -3,10 +3,6 @@
 require 'header.php';
 include 'config.php';
 
-if (!(isset($_SESSION['mac']) or isset($POST['mac']))) {
-  exit('Cannot access this page directly');
-}
-
 $host_ip = $_SERVER['HOST_IP'];
 $db_user = $_SERVER['DB_USER'];
 $db_pass = $_SERVER['DB_PASS'];
